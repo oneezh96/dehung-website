@@ -923,9 +923,17 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .h2 { font-size: 24px; }
   .h3 { font-size: 22px; }
   .site-logo img { height: 34px; }
-  .hero__bottom { flex-direction: column; margin-top: 40px; }
+  /* phone heroes: content starts at the same height on every page and the hero grows with it,
+     instead of a full-screen block with the text pushed to the bottom */
+  .hero { min-height: 0; }
+  .hero__inner,
+  .hero__inner--title-only { justify-content: flex-start; padding-top: calc(var(--header-h) + 88px); padding-bottom: 120px; }
+  .hero__bottom,
+  .hero__bottom--end { flex-direction: column; align-items: flex-start; gap: 32px; margin-top: 40px; }
   .hero__aside { margin-top: 0; align-items: flex-start; text-align: left; }
-  .hero__inner--title-only { padding-bottom: 112px; }
+  /* on narrow screens, wrap Chinese headings and lead text only at punctuation (，、。) so words
+     are not split and no line ends with one or two orphan characters; anywhere-break is the fallback */
+  .h1, .h2, .h3, .text-large { word-break: keep-all; overflow-wrap: anywhere; }
   .services__list { margin-top: 48px; }
   .service-card { width: calc(50% - 12px); }
   .split__img { height: 280px; }
