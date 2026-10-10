@@ -1,0 +1,18 @@
+# macOS / iCloud system files
+.DS_Store
+*.icloud
+# macOS custom folder icon file (named "Icon" + carriage return)
+Icon[\r]
+
+# Editor settings
+.vscode/
+.idea/
+
+# Original logo files — not used by the site, keep them local only
+assets/dh-logo.png
+assets/dh-logo-light.png
+
+# Leftover assets from the first Figma export — no longer used by any page
+assets/arrow.svg
+assets/line-divider.svg
+assets/star.svg

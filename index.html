@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 預覽階段：不讓搜尋引擎收錄。正式上線時刪除這一行，並把 robots.txt 改成允許 -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>德衡國際 DEHUNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="section site-header__inner">
+      <a class="site-logo" href="index.html"><img src="assets/dh-icon.png" alt="德衡國際 DEHUNG 首頁" width="26" height="40" /></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="主選單">
+        <ul class="site-nav__list">
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="section hero__inner">
+        <h1 class="h1">讓好的設計<br />落實成好的工程</h1>
+        <div class="hero__bottom">
+          <p class="text-large">讓材料、設計與工程真正對話<br />從選材到落地，讓每一個決策都經得起空間的真實使用</p>
+          <div class="hero__aside">
+            <p class="text-large">每一個選擇，都關乎<br />性能、安全與長期價值</p>
+            <div class="btn-group">
+              <a class="btn btn--ghost-light" href="products.html">探索產品<span class="arrow" aria-hidden="true"></span></a>
+              <a class="btn btn--primary" href="contact.html">專案諮詢<span class="arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="hero__scroll" aria-hidden="true"></span>
+    </section>
+
+    <!-- 服務流程 -->
+    <section class="section block services">
+      <h2 class="h3">好的設計，從選材到落地都能完整實現</h2>
+      <ul class="services__list">
+        <li class="card service-card"><h3 class="h4">材料選型</h3><img src="assets/icons/materials.svg" alt="" width="72" height="72" /></li>
+        <li class="card service-card"><h3 class="h4">規格建議</h3><img src="assets/icons/specs.svg" alt="" width="72" height="72" /></li>
+        <li class="card service-card"><h3 class="h4">預算評估</h3><img src="assets/icons/budget.svg" alt="" width="72" height="72" /></li>
+        <li class="card service-card"><h3 class="h4">工程介面整合</h3><img src="assets/icons/integration.svg" alt="" width="72" height="72" /></li>
+        <li class="card service-card"><h3 class="h4">專案管理</h3><img src="assets/icons/management.svg" alt="" width="72" height="72" /></li>
+      </ul>
+    </section>
+
+    <!-- 場域 -->
+    <section class="section block two-col" data-sectors>
+      <div class="sectors__media">
+        <figure class="sector-panel sector-panel--medical is-active" id="medical-panel" role="tabpanel" aria-labelledby="medical-tab">
+          <!-- 換成照片：<img src="assets/sectors/medical.jpg" alt="醫療與長照" /> -->
+          <span class="sector-panel__placeholder">圖片：醫療與長照</span>
+        </figure>
+        <figure class="sector-panel sector-panel--public" id="public-panel" role="tabpanel" aria-labelledby="public-tab" aria-hidden="true">
+          <!-- 換成照片：<img src="assets/sectors/public.jpg" alt="公共空間" /> -->
+          <span class="sector-panel__placeholder">圖片：公共空間</span>
+        </figure>
+        <figure class="sector-panel sector-panel--industrial" id="industrial-panel" role="tabpanel" aria-labelledby="industrial-tab" aria-hidden="true">
+          <!-- 換成照片：<img src="assets/sectors/industrial.jpg" alt="工業與食品場域" /> -->
+          <span class="sector-panel__placeholder">圖片：工業與食品場域</span>
+        </figure>
+        <figure class="sector-panel sector-panel--civil" id="civil-panel" role="tabpanel" aria-labelledby="civil-tab" aria-hidden="true">
+          <!-- 換成照片：<img src="assets/sectors/civil.jpg" alt="公共工程" /> -->
+          <span class="sector-panel__placeholder">圖片：公共工程</span>
+        </figure>
+        <p class="sectors__tag" aria-hidden="true"><span class="sectors__tag-num" data-sector-num>01</span><span data-sector-name>醫療與長照</span></p>
+      </div>
+      <div class="split__body">
+        <h2 class="h3">材料之外，是對場域的理解</h2>
+        <p class="text-large split__intro">市場不缺好的材料<br />重要的是為不同場域，找到合適的選擇</p>
+        <ul class="sectors__list split__foot" role="tablist" aria-orientation="vertical" aria-label="服務場域">
+          <li class="sector-item is-active">
+            <button class="sector-tab" id="medical-tab" role="tab" aria-controls="medical-panel" aria-selected="true" tabindex="0" data-num="01">
+              <span class="h4">醫療與長照</span>
+              <span class="text-body">在 24 小時營運的醫療環境中，我們聚焦衛生規範與防滑，守護醫護效率與患者福祉</span>
+            </button>
+          </li>
+          <li class="sector-item">
+            <button class="sector-tab" id="public-tab" role="tab" aria-controls="public-panel" aria-selected="false" tabindex="-1" data-num="02">
+              <span class="h4">公共空間</span>
+              <span class="text-body">讓公共空間的安全與舒適度被看見，將材料應用轉化為長效的使用者體驗</span>
+            </button>
+          </li>
+          <li class="sector-item">
+            <button class="sector-tab" id="industrial-tab" role="tab" aria-controls="industrial-panel" aria-selected="false" tabindex="-1" data-num="03">
+              <span class="h4">工業與食品場域</span>
+              <span class="text-body">針對工業場域，提供高規格的安全與衛生/公安規劃</span>
+            </button>
+          </li>
+          <li class="sector-item">
+            <button class="sector-tab" id="civil-tab" role="tab" aria-controls="civil-panel" aria-selected="false" tabindex="-1" data-num="04">
+              <span class="h4">公共工程</span>
+              <span class="text-body">在學校、政府機關或公共空間落實結構安全與應用合理性的長久承諾</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 專案實踐 -->
+    <section class="section block two-col">
+      <div class="split__body">
+        <h2 class="h3">專案實踐</h2>
+        <p class="text-large split__intro">從場域條件到實際應用</p>
+        <article class="case split__foot">
+          <span class="project-num"><span class="number">01</span><img src="assets/line-short.svg" alt="" width="47" height="4" /></span>
+          <p class="eyebrow eyebrow--accent">醫療空間</p>
+          <h3 class="h4">台北醫院</h3>
+          <p class="text-body">在有限工期與不停業的條件下，施工不只是完成安裝，更需要兼顧院區營運、環境管理與醫療空間的實際需求。</p>
+          <a class="btn btn--secondary" href="projects.html#hospital">查看實績案例<span class="arrow" aria-hidden="true"></span></a>
+        </article>
+      </div>
+      <!-- 換成照片：<img class="split__img" src="assets/home/case-hospital.jpg" alt="台北醫院" style="object-fit:cover;width:100%" /> -->
+      <div class="placeholder-img split__img" role="img" aria-label="案例圖片"></div>
+    </section>
+
+    <!-- 聯繫 CTA -->
+    <section class="cta-band block">
+      <div class="section two-col cta-band__inner">
+        <img class="cta-band__graphic" src="assets/contact-graphic.svg" alt="" width="1440" height="440" />
+        <div>
+          <h2 class="h3">建立屬於您的專案需求</h2>
+          <p class="text-large">若您正在規劃醫療，商業，工業，特殊應用或高人流等公共空間<br />歡迎與德衡聯繫<br />從規劃初期釐清需求<br />協助您從材料、規格、施工到整體系統，找到合適的方向</p>
+        </div>
+        <div>
+          <a class="btn btn--inverse" href="contact.html">專案諮詢<span class="arrow" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/dh-icon.png" alt="" width="18" height="28" />
+        <p>© 2026 德衡國際 DEHUNG</p>
+      </div>
+      <nav aria-label="頁尾選單">
+        <ul>
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

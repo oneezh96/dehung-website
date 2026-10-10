@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 預覽階段：不讓搜尋引擎收錄。正式上線時刪除這一行，並把 robots.txt 改成允許 -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>聯繫我們 | 德衡國際 DEHUNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="section site-header__inner">
+      <a class="site-logo" href="index.html"><img src="assets/dh-icon.png" alt="德衡國際 DEHUNG 首頁" width="26" height="40" /></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="主選單">
+        <ul class="site-nav__list">
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html" aria-current="page">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 左：深藍面板（延續各頁底部的聯繫區塊），右：表單。表單在第一個畫面就看得到 -->
+    <section class="contact">
+      <div class="contact__panel">
+        <img class="contact__graphic" src="assets/contact-graphic.svg" alt="" width="1440" height="440" />
+        <div class="contact__intro">
+          <h1 class="h1">討論您的<br />下一個專案</h1>
+          <p class="text-large">如果您正在規劃醫療、商業、公共工程或工業空間<br />歡迎與德衡聯繫<br /><br />我們樂於在專案初期就參與討論<br />協助您從材料、規格、施工到整體系統找到最適合的方向</p>
+        </div>
+      </div>
+
+      <div class="contact__form-wrap">
+        <!-- 送出功能尚未串接：把 data-endpoint 填入表單服務的網址（例如 Formspree），就會用它送出 -->
+        <form class="contact-form" data-validate data-endpoint="" novalidate>
+          <p class="contact-form__note"><span aria-hidden="true">*</span> 為必填欄位</p>
+          <div class="field">
+            <label for="f-name">姓名 <span aria-hidden="true">*</span></label>
+            <input id="f-name" name="name" required aria-required="true" aria-describedby="f-name-error" type="text" autocomplete="name" />
+            <p class="field__error" id="f-name-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-company">公司</label>
+            <input id="f-company" name="company" aria-describedby="f-company-error" type="text" autocomplete="organization" />
+            <p class="field__error" id="f-company-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">電話</label>
+            <input id="f-phone" name="phone" aria-describedby="f-phone-error" type="tel" autocomplete="tel" />
+            <p class="field__error" id="f-phone-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span aria-hidden="true">*</span></label>
+            <input id="f-email" name="email" required aria-required="true" aria-describedby="f-email-error" type="email" autocomplete="email" />
+            <p class="field__error" id="f-email-error" aria-live="polite"></p>
+          </div>
+          <div class="field field--full">
+            <label for="f-message">需求說明 <span aria-hidden="true">*</span></label>
+            <textarea id="f-message" name="message" required aria-required="true" aria-describedby="f-message-error"></textarea>
+            <p class="field__error" id="f-message-error" aria-live="polite"></p>
+          </div>
+          <div class="contact-form__actions">
+            <button class="btn btn--primary" type="submit">送出需求<span class="arrow" aria-hidden="true"></span></button>
+            <p class="contact-form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/dh-icon.png" alt="" width="18" height="28" />
+        <p>© 2026 德衡國際 DEHUNG</p>
+      </div>
+      <nav aria-label="頁尾選單">
+        <ul>
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

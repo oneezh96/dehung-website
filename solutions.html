@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 預覽階段：不讓搜尋引擎收錄。正式上線時刪除這一行，並把 robots.txt 改成允許 -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>服務領域 | 德衡國際 DEHUNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="section site-header__inner">
+      <a class="site-logo" href="index.html"><img src="assets/dh-icon.png" alt="德衡國際 DEHUNG 首頁" width="26" height="40" /></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="主選單">
+        <ul class="site-nav__list">
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html" aria-current="page">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero：與首頁、關於德衡同一套 -->
+    <section class="hero">
+      <div class="section hero__inner hero__inner--title-only">
+        <!-- 一組標題：上方小標列出三個系統，下方主標題；與其他頁標題同樣靠左、同樣高度 -->
+        <h1 class="hero-title" aria-label="地板、天花板、牆面三大系統">
+          <span class="hero-title__kicker"><span>地板</span><span>天花板</span><span>牆面</span></span>
+          <span class="h1">三大系統</span>
+        </h1>
+      </div>
+      <span class="hero__scroll" aria-hidden="true"></span>
+    </section>
+
+    <!-- 三大系統總覽 -->
+    <section class="section block">
+      <ol class="system-cards">
+        <li>
+          <a class="system-card" href="#floor">
+            <img src="assets/icons/system-floor.svg" alt="" width="120" height="120" />
+            <span class="number">01</span>
+            <span class="h3">地板系統</span>
+            <span class="system-card__more">查看系統<span class="arrow" aria-hidden="true"></span></span>
+          </a>
+        </li>
+        <li>
+          <a class="system-card" href="#ceiling">
+            <img src="assets/icons/system-ceiling.svg" alt="" width="120" height="120" />
+            <span class="number">02</span>
+            <span class="h3">天花板系統</span>
+            <span class="system-card__more">查看系統<span class="arrow" aria-hidden="true"></span></span>
+          </a>
+        </li>
+        <li>
+          <a class="system-card" href="#wall">
+            <img src="assets/icons/system-wall.svg" alt="" width="120" height="120" />
+            <span class="number">03</span>
+            <span class="h3">牆面與相關系統</span>
+            <span class="system-card__more">查看系統<span class="arrow" aria-hidden="true"></span></span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 系統詳細：左側目錄固定，捲動時標示目前的系統 (main.js) -->
+    <div class="section block systems">
+      <nav class="systems__index" aria-label="三大系統">
+        <a href="#floor" data-spy="floor"><span class="eyebrow">01</span>地板系統</a>
+        <a href="#ceiling" data-spy="ceiling"><span class="eyebrow">02</span>天花板系統</a>
+        <a href="#wall" data-spy="wall"><span class="eyebrow">03</span>牆面與相關系統</a>
+      </nav>
+      <div class="systems__content">
+      <article class="system" id="floor">
+        <!-- 換成照片：<img class="system__img" src="assets/solutions/floor.jpg" alt="地板系統" /> -->
+        <div class="placeholder-img system__img" role="img" aria-label="地板系統圖片"></div>
+        <div class="system__text">
+          <div>
+            <span class="system__num">01</span>
+            <h2 class="h2">地板系統</h2>
+          </div>
+          <div class="system__desc">
+            <p class="text-body">每個空間都有不同需求。德衡不以單一品牌思考，而是依據使用需求、預算及生命週期成本，協助客戶配置最適合的地坪系統。我們代理品牌包含英國百品牌Altro, 全球地材領航者Armstrong到最為被廣泛應用的美喆商用地板。我們重視的是個案的全空間地材規劃，讓空間體驗符合使用者需求。</p>
+          </div>
+        </div>
+      </article>
+      <article class="system" id="ceiling">
+        <!-- 換成照片：<img class="system__img" src="assets/solutions/ceiling.jpg" alt="天花板系統" /> -->
+        <div class="placeholder-img system__img" role="img" aria-label="天花板系統圖片"></div>
+        <div class="system__text">
+          <div>
+            <span class="system__num">02</span>
+            <h2 class="h2">天花板系統</h2>
+          </div>
+          <div class="system__desc">
+            <p class="text-body">天花板不只是室內裝修的一部分。它同時影響空間安全、設備整合、施工效率與未來維護。我們提供耐震、吸音、防火及各類商業天花系統，協助不同場域建立更安全、更完整的空間。</p>
+            <p class="text-body">核電廠級別的真綱耐震系統，僅需 6cm 的垂直空間即可實現「耐震 6 強」防護，在強震發生時守護逃生動線，並提升室內淨高。</p>
+          </div>
+        </div>
+      </article>
+      <article class="system" id="wall">
+        <!-- 換成照片：<img class="system__img" src="assets/solutions/wall.jpg" alt="牆面與相關系統" /> -->
+        <div class="placeholder-img system__img" role="img" aria-label="牆面與相關系統圖片"></div>
+        <div class="system__text">
+          <div>
+            <span class="system__num">03</span>
+            <h2 class="h2">牆面與相關系統</h2>
+          </div>
+          <div class="system__desc">
+            <p class="text-body">牆面不只是立面。在醫療、商業與工業空間中，它同時影響耐用性、清潔維護及整體介面品質。我們協助不同材料之間的整合，讓整個空間真正成為一個完整系統，涵蓋淺野醫療級抗菌牆板、環球石膏板、矽酸鈣板等材料規劃。</p>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <!-- 聯繫 CTA -->
+    <section class="cta-band block">
+      <div class="section two-col cta-band__inner">
+        <img class="cta-band__graphic" src="assets/contact-graphic.svg" alt="" width="1440" height="440" />
+        <div>
+          <h2 class="h3">建立屬於您的專案需求</h2>
+          <p class="text-large">若您正在規劃醫療，商業，工業，特殊應用或高人流等公共空間<br />歡迎與德衡聯繫<br />從規劃初期釐清需求<br />協助您從材料、規格、施工到整體系統，找到合適的方向</p>
+        </div>
+        <div>
+          <a class="btn btn--inverse" href="contact.html">專案諮詢<span class="arrow" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/dh-icon.png" alt="" width="18" height="28" />
+        <p>© 2026 德衡國際 DEHUNG</p>
+      </div>
+      <nav aria-label="頁尾選單">
+        <ul>
+          <li><a href="about.html">關於德衡</a></li>
+          <li><a href="solutions.html">服務領域</a></li>
+          <li><a href="products.html">合作品牌</a></li>
+          <li><a href="projects.html">實績案例</a></li>
+          <li><a href="contact.html">聯繫我們</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
