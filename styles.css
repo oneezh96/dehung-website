@@ -1121,8 +1121,23 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   /* on narrow screens, wrap Chinese headings and lead text only at punctuation (，、。) so words
      are not split and no line ends with one or two orphan characters; anywhere-break is the fallback */
   .h1, .h2, .h3, .text-large { word-break: keep-all; overflow-wrap: anywhere; }
-  .services__list { margin-top: 48px; }
-  .service-card { width: calc(50% - 12px); }
+  /* 好的設計: the five cards become a compact list — small icon, name, thin rules — matching the
+     場域 list below, and the heading aligns left like every other section on the phone */
+  .services { text-align: left; }
+  .services__list { flex-direction: column; flex-wrap: nowrap; gap: 0; margin-top: 32px; }
+  .service-card {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 20px;
+    width: auto;
+    height: auto;
+    padding: 16px 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    background: none;
+  }
+  .service-card:last-child { border-bottom: 1px solid var(--color-border); }
+  .service-card img { width: 40px; height: 40px; margin-top: 0; }
   .split__img { height: 280px; }
   .page-intro { padding-top: calc(var(--header-h) + 72px); }
   .brand-grid { grid-template-columns: 1fr; }
