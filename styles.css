@@ -282,6 +282,11 @@ img.split__img { width: 100%; object-fit: cover; }
 .slideshow__dot[aria-current="true"] { width: 40px; background: #fff; }
 .slideshow__dot:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 
+/* full-width light-gray band that sets a section apart from its neighbours */
+.band { padding: 120px 0; background: var(--logo-white); }
+/* a band followed by the navy closing band: the two coloured blocks meet with no sliver of page between */
+.band + .cta-band { margin-top: 0; }
+
 .case { max-width: 513px; }
 .case .eyebrow { margin-top: 24px; }
 .case .h4,
@@ -1130,6 +1135,7 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   /* phone buttons: smaller everywhere so they sit in proportion with 15px body text */
   .btn { height: 40px; gap: 12px; padding: 0 18px; font-size: 12px; }
   /* 專案實踐: heading and intro, then the photo, then the case — same order as the 場域 section */
+  .band { padding: 64px 0; }
   .practice { row-gap: 0; }
   .practice .split__body { display: contents; }
   .practice .h3 { order: 1; }
