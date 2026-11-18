@@ -630,14 +630,15 @@ img.split__img { width: 100%; object-fit: cover; }
   pointer-events: none;
 }
 .field-panel.is-active::before { opacity: 0; }
-/* Altro's own reversed logo on the open photo; 48px clear of the edges (guideline: X-height clear space) */
+/* Altro's own reversed logo on the open photo; 48px clear of the edges (guideline: X-height clear
+   space). The caption keeps clear of it (see .field-panel__body right) so they never overlap. */
 .field-panel__mark {
   position: absolute;
   right: 48px;
   bottom: 48px;
   z-index: 2;
   width: auto;
-  height: 40px;
+  height: 30px;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
@@ -685,7 +686,7 @@ img.split__img { width: 100%; object-fit: cover; }
 .field-panel__body {
   position: absolute;
   left: 48px;
-  right: 48px;
+  right: 168px; /* 48px edge + ~75px logo + 45px gap */
   bottom: 48px;
   z-index: 2;
   max-width: 560px;
@@ -1014,6 +1015,21 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .two-col { grid-template-columns: 1fr; row-gap: 40px; }
   .sector-item::before { display: none; }
   .sectors__media { --media-h: 400px; }
+  /* single column: heading and intro first, then the photo, then the list. The text column is
+     unwrapped so its pieces can sit either side of the photo. */
+  [data-sectors] { row-gap: 0; }
+  [data-sectors] .split__body { display: contents; }
+  [data-sectors] .h3 { order: 1; }
+  [data-sectors] .split__intro { order: 2; }
+  [data-sectors] .sectors__media { order: 3; margin-top: 40px; }
+  [data-sectors] .sectors__list { order: 4; margin-top: 32px; padding-top: 0; gap: 0; }
+  /* no hover on touch: every description shows, items separated by thin rules; tapping still
+     switches the photo and marks the item */
+  .sector-tab { padding: 20px 0; }
+  .sector-item { border-top: 1px solid var(--color-border); }
+  .sector-item:last-child { border-bottom: 1px solid var(--color-border); }
+  .sector-tab .text-body { opacity: 1; transform: none; color: var(--logo-gray); text-wrap: pretty; }
+  .sector-tab .h4 { margin-bottom: 6px; }
   .services__list { flex-wrap: wrap; gap: 24px; }
   .system--reverse .split__img { order: 0; }
   .split__img { height: 400px; }
@@ -1026,7 +1042,8 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .systems__index { display: none; }
   .system__img { height: 400px; }
   .system-card { padding: 40px 24px 32px; }
-  .field-panel__body { left: 32px; right: 32px; bottom: 32px; }
+  .field-panel__body { left: 32px; right: 144px; bottom: 32px; }
+  .field-panel__mark { right: 32px; bottom: 32px; }
   .cta-band__graphic { opacity: 0.4; }
 }
 @media (max-width: 900px) {
@@ -1059,6 +1076,19 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .hero__bottom,
   .hero__bottom--end { flex-direction: column; align-items: flex-start; gap: 32px; margin-top: 40px; }
   .hero__aside { margin-top: 0; align-items: flex-start; text-align: left; }
+  /* phone hero type: tighter headline, smaller lead, the aside reads as a secondary note under a
+     thin rule, and the two buttons share the row */
+  .hero .h1,
+  .contact__intro .h1 { font-size: 30px; line-height: 1.45; letter-spacing: 0.12em; }
+  .hero .text-large,
+  .contact__intro .text-large { font-size: 15px; line-height: 1.9; letter-spacing: 0.06em; }
+  .contact__intro .text-large { margin-top: 28px; }
+  .hero__bottom { gap: 28px; margin-top: 28px; }
+  .hero__aside { align-self: stretch; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(241, 241, 242, 0.25); }
+  .hero__aside .text-large { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+  .hero__aside .hero__statement { font-size: 15px; color: var(--logo-white); }
+  .hero .btn-group { gap: 12px; }
+  .hero .btn-group .btn { height: 40px; gap: 12px; padding: 0 18px; font-size: 12px; }
   /* on narrow screens, wrap Chinese headings and lead text only at punctuation (，、。) so words
      are not split and no line ends with one or two orphan characters; anywhere-break is the fallback */
   .h1, .h2, .h3, .text-large { word-break: keep-all; overflow-wrap: anywhere; }
@@ -1072,7 +1102,7 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .case-item__body { margin-top: 32px; }
   .case-item.is-open .case-item__inner { padding-bottom: 40px; }
   .contact { grid-template-columns: 1fr; min-height: 0; }
-  .contact__intro { padding: calc(var(--header-h) + 56px) var(--gutter) 56px; }
+  .contact__intro { padding: calc(var(--header-h) + 88px) var(--gutter) 64px; }
   .contact__graphic { display: none; }
   .contact__form-wrap { padding: 56px var(--gutter) 96px; }
   .contact-form { grid-template-columns: 1fr; gap: 28px; }
@@ -1092,6 +1122,8 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .field-panel__num { flex-direction: row; align-items: center; }
   .field-panel__label { writing-mode: horizontal-tb; font-size: 16px; letter-spacing: 0.1em; }
   .field-panel__body { left: 20px; right: 20px; bottom: 28px; }
+  /* phone: the caption spans the width, so the logo moves to the empty right end of the top row */
+  .field-panel__mark { top: 24px; right: 20px; bottom: auto; height: 24px; }
   .cta-band__inner { padding-top: 80px; padding-bottom: 80px; row-gap: 32px; }
   .cta-band__graphic { display: none; }
   .site-footer__inner { flex-direction: column; align-items: flex-start; }
