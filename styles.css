@@ -1088,7 +1088,16 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .hero__aside .text-large { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
   .hero__aside .hero__statement { font-size: 15px; color: var(--logo-white); }
   .hero .btn-group { gap: 12px; }
-  .hero .btn-group .btn { height: 40px; gap: 12px; padding: 0 18px; font-size: 12px; }
+  /* phone buttons: smaller everywhere so they sit in proportion with 15px body text */
+  .btn { height: 40px; gap: 12px; padding: 0 18px; font-size: 12px; }
+  /* 專案實踐: heading and intro, then the photo, then the case — same order as the 場域 section */
+  .practice { row-gap: 0; }
+  .practice .split__body { display: contents; }
+  .practice .h3 { order: 1; }
+  .practice .split__intro { order: 2; }
+  .practice .split__img { order: 3; margin-top: 32px; }
+  .practice .case { order: 4; padding-top: 32px; }
+  .practice .case .btn { margin-top: 24px; }
   /* on narrow screens, wrap Chinese headings and lead text only at punctuation (，、。) so words
      are not split and no line ends with one or two orphan characters; anywhere-break is the fallback */
   .h1, .h2, .h3, .text-large { word-break: keep-all; overflow-wrap: anywhere; }
