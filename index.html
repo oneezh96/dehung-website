@@ -30,7 +30,8 @@
 
   <main>
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero hero--photo">
+      <img class="hero__bg" src="assets/home/hero.jpg" alt="" fetchpriority="high" />
       <div class="section hero__inner">
         <h1 class="h1">讓好的設計<br />落實成好的工程</h1>
         <div class="hero__bottom">
@@ -60,23 +61,19 @@
     </section>
 
     <!-- 場域 -->
-    <section class="section block two-col" data-sectors>
+    <section class="section block two-col sectors--fade" data-sectors>
       <div class="sectors__media">
         <figure class="sector-panel sector-panel--medical is-active" id="medical-panel" role="tabpanel" aria-labelledby="medical-tab">
-          <!-- 換成照片：<img src="assets/sectors/medical.jpg" alt="醫療與長照" /> -->
-          <span class="sector-panel__placeholder">圖片：醫療與長照</span>
+          <img src="assets/sectors/medical.jpg" alt="無障礙衛浴：止滑地板、扶手與洗澡椅" />
         </figure>
         <figure class="sector-panel sector-panel--public" id="public-panel" role="tabpanel" aria-labelledby="public-tab" aria-hidden="true">
-          <!-- 換成照片：<img src="assets/sectors/public.jpg" alt="公共空間" /> -->
-          <span class="sector-panel__placeholder">圖片：公共空間</span>
+          <img src="assets/sectors/public.jpg" alt="大學中庭與用餐區的大面積地坪" />
         </figure>
         <figure class="sector-panel sector-panel--industrial" id="industrial-panel" role="tabpanel" aria-labelledby="industrial-tab" aria-hidden="true">
-          <!-- 換成照片：<img src="assets/sectors/industrial.jpg" alt="工業與食品場域" /> -->
-          <span class="sector-panel__placeholder">圖片：工業與食品場域</span>
+          <img src="assets/sectors/industrial-food.jpg" alt="餐廳廚房：木作櫥櫃、不鏽鋼工作台與深色地坪" />
         </figure>
         <figure class="sector-panel sector-panel--civil" id="civil-panel" role="tabpanel" aria-labelledby="civil-tab" aria-hidden="true">
-          <!-- 換成照片：<img src="assets/sectors/civil.jpg" alt="公共工程" /> -->
-          <span class="sector-panel__placeholder">圖片：公共工程</span>
+          <img src="assets/sectors/civil-works.jpg" alt="衛生牆板、不鏽鋼設備與地面排水的後場空間" />
         </figure>
         <p class="sectors__tag" aria-hidden="true"><span class="sectors__tag-num" data-sector-num>01</span><span data-sector-name>醫療與長照</span></p>
       </div>
@@ -125,8 +122,7 @@
           <a class="btn btn--secondary" href="projects.html#hospital">查看實績案例<span class="arrow" aria-hidden="true"></span></a>
         </article>
       </div>
-      <!-- 換成照片：<img class="split__img" src="assets/home/case-hospital.jpg" alt="台北醫院" style="object-fit:cover;width:100%" /> -->
-      <div class="placeholder-img split__img" role="img" aria-label="案例圖片"></div>
+      <img class="split__img" src="assets/home/case-hospital.jpg" alt="臺北醫院院史走廊，完工後的地坪" loading="lazy" />
     </section>
 
     <!-- 聯繫 CTA -->

@@ -25,7 +25,7 @@
   --ease: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* Layout */
-  --page-max: 1440px;
+  --page-max: 1600px;      /* content box incl. gutters: 1440px of content on wide screens */
   --gutter: 80px;          /* fixed side margin on every page */
   --media-gap: 80px;       /* gap between an image and its text */
   --space-section: 160px;  /* vertical gap between sections */
@@ -150,6 +150,8 @@ img { display: block; }
   .site-header.is-on-dark .site-nav a:focus-visible,
   .site-header.is-on-dark .site-nav a[aria-current="page"] { color: var(--logo-white); }
   .site-header.is-on-dark .site-nav a::after { background: var(--logo-white); }
+  /* over a photo hero light gray gets lost in the picture: near-white instead */
+  body:has(.hero--photo) .site-header.is-on-dark .site-nav a:not(:hover, :focus-visible, [aria-current="page"]) { color: rgba(241, 241, 242, 0.8); }
 }
 .site-header.is-on-dark .nav-toggle span { background: var(--logo-white); }
 .site-header.is-on-dark:has(.nav-toggle[aria-expanded="true"]) .nav-toggle span { background: var(--logo-gray); }
@@ -217,6 +219,12 @@ img { display: block; }
 .btn:focus-visible { outline: 2px solid var(--logo-navy); outline-offset: 3px; }
 
 /* line + chevron arrow, also used on its own in list rows */
+/* text read by screen readers only */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
 .arrow {
   position: relative;
   flex: none;
@@ -257,6 +265,22 @@ img { display: block; }
 .split__intro { margin-top: 24px; }
 .split__foot { margin-top: auto; padding-top: 48px; }
 .split__img { height: 480px; }
+img.split__img { width: 100%; object-fit: cover; }
+
+/* 實績案例 slideshow: images crossfade on a timer; dots jump to a slide */
+.slideshow { position: relative; overflow: hidden; }
+.slideshow__slide {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.2s var(--ease);
+}
+.slideshow__slide.is-active { opacity: 1; }
+.slideshow__dots { position: absolute; left: 24px; bottom: 24px; display: flex; gap: 8px; }
+.slideshow__dot {
+  width: 24px; height: 3px; padding: 0; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, 0.5); transition: background 0.3s, width 0.3s var(--ease);
+}
+.slideshow__dot[aria-current="true"] { width: 40px; background: #fff; }
+.slideshow__dot:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 
 .case { max-width: 513px; }
 .case .eyebrow { margin-top: 24px; }
@@ -280,7 +304,7 @@ img { display: block; }
   align-items: center;
   justify-content: center;
   clip-path: polygon(calc(-1 * var(--slant)) -2px, 0 -2px, calc(-1 * var(--slant)) calc(100% + 2px), calc(-1 * var(--slant)) calc(100% + 2px));
-  transition: clip-path 0.9s var(--ease);
+  transition: clip-path 1.4s var(--ease);
 }
 .sector-panel.is-active,
 .sector-panel.is-prev {
@@ -289,7 +313,39 @@ img { display: block; }
 }
 .sector-panel.is-active { z-index: 2; }
 .sector-panel.is-prev { z-index: 1; transition: none; }
+/* main.js snaps the incoming panel back to its hidden state before revealing it */
+.sector-panel.is-resetting,
+.sector-panel.is-resetting > * { transition: none !important; }
 .sector-panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Transition options — set on the section as .sectors--fade or .sectors--reveal (default above is the 30° wipe).
+   Both start fast and settle slowly, like a photo being laid down rather than an effect playing. */
+.sectors--fade .sector-panel,
+.sectors--reveal .sector-panel { --settle: cubic-bezier(0.2, 0.7, 0.1, 1); }
+
+/* fade: the new image dissolves in over the old one while easing back from a slight zoom */
+.sectors--fade .sector-panel {
+  clip-path: none;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s var(--settle), transform 1.6s var(--settle);
+}
+.sectors--fade .sector-panel.is-active,
+.sectors--fade .sector-panel.is-prev { clip-path: none; opacity: 1; transform: none; }
+
+/* reveal: a level edge rises from the bottom while the image inside lifts slightly into place */
+.sectors--reveal .sector-panel {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s var(--settle);
+}
+.sectors--reveal .sector-panel.is-active,
+.sectors--reveal .sector-panel.is-prev { clip-path: inset(0); }
+.sectors--reveal .sector-panel > * {
+  transform: translateY(48px) scale(1.06);
+  transition: transform 1.6s var(--settle);
+}
+.sectors--reveal .sector-panel.is-active > *,
+.sectors--reveal .sector-panel.is-prev > * { transform: none; }
 .sector-panel__placeholder { font-size: 14px; letter-spacing: 0.2em; }
 .sector-panel--medical    { background: var(--logo-gray-light); color: var(--logo-white); }
 .sector-panel--public     { background: var(--logo-gray);       color: var(--logo-white); }
@@ -399,12 +455,31 @@ img { display: block; }
   background: var(--color-hero);
   color: var(--color-white);
   overflow: hidden;
+  isolation: isolate; /* keeps .hero__bg under the overlay but above the hero's own background */
+}
+/* optional background photo, under the dark overlay */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--color-hero-overlay);
+}
+/* over a photo: a translucent dark-gray gradient — deeper behind the menu and the headline,
+   lighter in between so the space still reads */
+.hero--photo::before {
+  background: linear-gradient(to bottom,
+    rgba(34, 34, 34, 0.72) 0%,
+    rgba(34, 34, 34, 0.5) 30%,
+    rgba(34, 34, 34, 0.58) 55%,
+    rgba(34, 34, 34, 0.86) 100%);
 }
 .hero__inner {
   position: relative;
@@ -533,12 +608,41 @@ img { display: block; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to top, rgba(17, 17, 17, 0.6), rgba(17, 17, 17, 0) 55%);
+  /* light shade at the top for the number, deeper at the bottom for the text and logo */
+  background:
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.42), rgba(17, 17, 17, 0) 24%),
+    linear-gradient(to top, rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0) 60%);
   opacity: 0;
   transition: opacity 0.6s;
   pointer-events: none;
 }
 .field-panel.is-active::after { opacity: 1; }
+/* with a photo: white labels on every strip, and a veil over the closed strips so the
+   vertical names read on light photos; it lifts as a strip opens */
+.field-panel:has(.field-panel__media img) { --fg: var(--logo-white); }
+.field-panel:has(.field-panel__media img)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(17, 17, 17, 0.52);
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+.field-panel.is-active::before { opacity: 0; }
+/* Altro's own reversed logo on the open photo; 48px clear of the edges (guideline: X-height clear space) */
+.field-panel__mark {
+  position: absolute;
+  right: 48px;
+  bottom: 48px;
+  z-index: 2;
+  width: auto;
+  height: 40px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.field-panel.is-active .field-panel__mark { opacity: 1; transition: opacity 0.6s 0.35s; }
 
 .field-panel__btn {
   position: absolute;
@@ -731,6 +835,30 @@ img { display: block; }
 .brand-card__img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
 .brand-card__body { padding-top: 24px; }
 .brand-card .h4 { margin-bottom: 8px; }
+/* product photo with the brand's white logo over a dark gradient at the bottom; hover eases the photo in */
+.brand-card__media { position: relative; overflow: hidden; }
+.brand-card__media .brand-card__img { display: block; transition: transform 0.8s var(--ease); }
+.brand-card__media:has(.brand-card__mark)::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.6), rgba(17, 17, 17, 0) 60%);
+}
+/* bright photos with furniture under the logo need a deeper gradient to keep the logo legible */
+.brand-card__media--bright:has(.brand-card__mark)::after {
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.78), rgba(17, 17, 17, 0.35) 30%, rgba(17, 17, 17, 0) 65%);
+}
+/* brands' own reversed logos, used unaltered as their guidelines require; bottom-right sits on the
+   plain floor in both photos (Altro guideline: only uncluttered, high-contrast photo areas) */
+.brand-card__mark { position: absolute; right: 24px; bottom: 24px; z-index: 1; width: auto; height: 44px; }
+/* long single-line wordmarks need less height to sit at a similar visual size */
+.brand-card__mark--wide { height: 18px; }
+.brand-card:hover .brand-card__media .brand-card__img { transform: scale(1.04); }
+/* the official-site link stretches over the whole card, so the photo is clickable too */
+.brand-card { position: relative; }
+.brand-card__body:has(.brand-card__link) { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+.brand-card__link { margin-top: auto; padding-top: 20px; }
+.brand-card__link::before { content: ""; position: absolute; inset: 0; z-index: 2; }
+.brand-card:hover .brand-card__link { color: var(--logo-navy); }
+.brand-card:hover .brand-card__link .arrow { width: 28px; }
 
 /* ---------- 05 Projects — expandable case rows; opening one reveals its image, then its text ---------- */
 .case-item,
@@ -819,7 +947,7 @@ img { display: block; }
 
 /* ---------- 06 Contact — split screen: navy intro panel left, form right, both above the fold ---------- */
 .contact {
-  /* side padding that still lines up with the 1440 content box on very wide screens */
+  /* side padding that still lines up with the page content box on very wide screens */
   --edge: max(var(--gutter), calc((100vw - var(--page-max)) / 2 + var(--gutter)));
   display: grid;
   grid-template-columns: 5fr 7fr;

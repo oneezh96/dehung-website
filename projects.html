@@ -60,8 +60,17 @@
         </h2>
         <div class="case-item__panel" id="hospital-panel" role="region" aria-label="醫院">
           <div class="case-item__inner">
-            <!-- 主圖（16:9）：換成 <img class="case-item__img" src="assets/projects/hospital-main.jpg" alt="醫院案例主圖" /> -->
-            <div class="placeholder-img case-item__img" role="img" aria-label="醫院案例主圖"></div>
+            <!-- 主圖（16:9）輪播：增減照片時，slide 與下方 dot 的數量要一致 -->
+            <div class="case-item__img slideshow" data-slideshow aria-roledescription="輪播" aria-label="醫院案例照片">
+              <img class="slideshow__slide is-active" src="assets/projects/hospital-1.jpg" alt="臺北醫院院史走廊，完工後的地坪" />
+              <img class="slideshow__slide" src="assets/projects/hospital-2.jpg" alt="臺北醫院行政區走廊，完工後的地坪" style="object-position: center 30%" aria-hidden="true" />
+              <img class="slideshow__slide" src="assets/projects/hospital-3.jpg" alt="臺北醫院樓梯，完工後的地坪與防滑踏步條" aria-hidden="true" />
+              <div class="slideshow__dots">
+                <button type="button" class="slideshow__dot" aria-label="第 1 張" aria-current="true"></button>
+                <button type="button" class="slideshow__dot" aria-label="第 2 張"></button>
+                <button type="button" class="slideshow__dot" aria-label="第 3 張"></button>
+              </div>
+            </div>
             <div class="two-col case-item__body">
               <p class="text-large case-item__lead">在有限工期與不停業的條件下<br />施工不只是完成安裝<br />更需要兼顧院區營運、環境管理與醫療空間的實際需求</p>
               <div>

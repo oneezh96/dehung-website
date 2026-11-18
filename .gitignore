@@ -1,8 +1,16 @@
 # macOS / iCloud system files
 .DS_Store
+# macOS AppleDouble metadata files (created when copying to non-APFS drives)
+._*
 *.icloud
 # macOS custom folder icon file (named "Icon" + carriage return)
 Icon[\r]
+
+# Draft pages kept for reference — not part of the site
+_drafts/
+
+# Original full-size photos — the site uses the resized copies in assets/
+_photos-raw/
 
 # Editor settings
 .vscode/
@@ -16,3 +24,6 @@ assets/dh-logo-light.png
 assets/arrow.svg
 assets/line-divider.svg
 assets/star.svg
+
+# Local snapshots of the site — not uploaded
+_backups/

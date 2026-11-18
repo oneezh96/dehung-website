@@ -7,10 +7,17 @@ document.querySelectorAll("[data-sectors]").forEach((root) => {
   const tagName = root.querySelector("[data-sector-name]");
   let current = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
 
-  // Once a wipe finishes, drop the image underneath so its edges can't bleed through.
+  // TEMP for comparing transitions: index.html?sectors=fade | reveal | wipe
+  const variant = new URLSearchParams(location.search).get("sectors");
+  if (variant) {
+    root.classList.remove("sectors--fade", "sectors--reveal");
+    if (variant !== "wipe") root.classList.add(`sectors--${variant}`);
+  }
+
+  // Once the new image is fully in, drop the one underneath so its edges can't bleed through.
   panels.forEach((panel) =>
     panel.addEventListener("transitionend", (e) => {
-      if (e.propertyName === "clip-path" && panel.classList.contains("is-active")) {
+      if (e.target === panel && (e.propertyName === "clip-path" || e.propertyName === "opacity") && panel.classList.contains("is-active")) {
         panels.forEach((p) => p.classList.remove("is-prev"));
       }
     })
@@ -20,15 +27,15 @@ document.querySelectorAll("[data-sectors]").forEach((root) => {
     if (next === current) return;
     const incoming = panels[next];
 
-    // Previous image stays underneath while the new one wipes in on top.
+    // Previous image stays underneath while the new one comes in on top.
     panels.forEach((p) => p.classList.remove("is-prev"));
     panels[current].classList.replace("is-active", "is-prev");
 
     // Reset the incoming panel to its hidden state without animating, then reveal it.
-    incoming.style.transition = "none";
+    incoming.classList.add("is-resetting");
     incoming.classList.remove("is-prev");
     void incoming.offsetWidth;
-    incoming.style.transition = "";
+    incoming.classList.remove("is-resetting");
     incoming.classList.add("is-active");
 
     panels.forEach((p, i) => p.toggleAttribute("aria-hidden", i !== next));
@@ -43,10 +50,16 @@ document.querySelectorAll("[data-sectors]").forEach((root) => {
     current = next;
   }
 
+  let hoverTimer;
   tabs.forEach((tab, i) => {
     tab.addEventListener("click", () => activate(i));
     tab.addEventListener("focus", () => activate(i));
-    tab.addEventListener("mouseenter", () => activate(i));
+    // Hover waits a moment, so sweeping the pointer across the list doesn't flash every image.
+    tab.addEventListener("mouseenter", () => {
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => activate(i), 120);
+    });
+    tab.addEventListener("mouseleave", () => clearTimeout(hoverTimer));
     tab.addEventListener("keydown", (e) => {
       const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
       if (step) {
@@ -58,6 +71,37 @@ document.querySelectorAll("[data-sectors]").forEach((root) => {
       }
     });
   });
+});
+
+// 實績案例 — slideshow advances on its own; pauses on hover/focus, when the tab is hidden, or with reduced motion.
+document.querySelectorAll("[data-slideshow]").forEach((root) => {
+  const slides = [...root.querySelectorAll(".slideshow__slide")];
+  const dots = [...root.querySelectorAll(".slideshow__dot")];
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let current = 0;
+  let timer;
+
+  const show = (next) => {
+    slides.forEach((s, i) => {
+      s.classList.toggle("is-active", i === next);
+      s.toggleAttribute("aria-hidden", i !== next);
+    });
+    dots.forEach((d, i) => (i === next ? d.setAttribute("aria-current", "true") : d.removeAttribute("aria-current")));
+    current = next;
+  };
+  const stop = () => clearInterval(timer);
+  const start = () => {
+    stop();
+    if (!reduceMotion) timer = setInterval(() => show((current + 1) % slides.length), 5000);
+  };
+
+  dots.forEach((dot, i) => dot.addEventListener("click", () => { show(i); start(); }));
+  root.addEventListener("mouseenter", stop);
+  root.addEventListener("mouseleave", start);
+  root.addEventListener("focusin", stop);
+  root.addEventListener("focusout", start);
+  document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  start();
 });
 
 // Mobile menu: the toggle opens/closes the nav panel under the header.
