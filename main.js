@@ -50,9 +50,46 @@ document.querySelectorAll("[data-sectors]").forEach((root) => {
     current = next;
   }
 
+  // Single column (phones, tablets): the list is a sideways row of cards. Swiping it switches the
+  // photo to the card that settles at the left edge; tapping a card, or swiping the photo itself,
+  // brings that card into place.
+  const list = root.querySelector(".sectors__list");
+  const media = root.querySelector(".sectors__media");
+  const singleColumn = matchMedia("(max-width: 1100px)");
+  const showCard = (i) =>
+    list.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: "smooth" });
+  let scrollTimer;
+  list.addEventListener("scroll", () => {
+    if (!singleColumn.matches) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const x = list.scrollLeft;
+      let nearest = 0;
+      items.forEach((item, i) => {
+        const d = Math.abs(item.offsetLeft - items[0].offsetLeft - x);
+        if (d < Math.abs(items[nearest].offsetLeft - items[0].offsetLeft - x)) nearest = i;
+      });
+      activate(nearest);
+    }, 80);
+  }, { passive: true });
+  let touchX = null;
+  media.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  media.addEventListener("touchend", (e) => {
+    if (touchX === null || !singleColumn.matches) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) < 40) return;
+    const next = Math.min(Math.max(current + (dx < 0 ? 1 : -1), 0), tabs.length - 1);
+    activate(next);
+    showCard(next);
+  });
+
   let hoverTimer;
   tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => activate(i));
+    tab.addEventListener("click", () => {
+      activate(i);
+      if (singleColumn.matches) showCard(i);
+    });
     tab.addEventListener("focus", () => activate(i));
     // Hover waits a moment, so sweeping the pointer across the list doesn't flash every image.
     tab.addEventListener("mouseenter", () => {

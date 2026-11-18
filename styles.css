@@ -1022,12 +1022,31 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   [data-sectors] .h3 { order: 1; }
   [data-sectors] .split__intro { order: 2; }
   [data-sectors] .sectors__media { order: 3; margin-top: 40px; }
-  [data-sectors] .sectors__list { order: 4; margin-top: 32px; padding-top: 0; gap: 0; }
-  /* no hover on touch: every description shows, items separated by thin rules; tapping still
-     switches the photo and marks the item */
-  .sector-tab { padding: 20px 0; }
-  .sector-item { border-top: 1px solid var(--color-border); }
-  .sector-item:last-child { border-bottom: 1px solid var(--color-border); }
+  /* the four fields become a row of cards right under the photo: swipe sideways and the photo
+     follows (main.js), so it never leaves the screen. The row runs to the screen edges and the
+     next card peeks in to show there is more. */
+  [data-sectors] .sectors__list {
+    order: 4;
+    flex-direction: row;
+    gap: 12px;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 16px var(--gutter) 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--gutter);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  [data-sectors] .sectors__list::-webkit-scrollbar { display: none; }
+  .sector-item {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+    border: 1px solid var(--color-border);
+    transition: border-color 0.3s;
+  }
+  .sector-item.is-active { border-color: var(--logo-navy); }
+  .sector-tab { height: 100%; padding: 20px; }
+  /* no hover on touch: every card shows its description */
   .sector-tab .text-body { opacity: 1; transform: none; color: var(--logo-gray); text-wrap: pretty; }
   .sector-tab .h4 { margin-bottom: 6px; }
   .services__list { flex-wrap: wrap; gap: 24px; }
