@@ -1048,19 +1048,39 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
 }
 @media (max-width: 900px) {
   .nav-toggle { display: block; }
+  /* mobile menu: a frosted sheet that fills the screen behind the logo and toggle, fades in,
+     and brings the items up one after another */
   .site-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--logo-white);
+    position: fixed;
+    inset: 0;
+    z-index: -1; /* above the header tint, below the logo and toggle */
+    padding-top: var(--header-h);
+    background: rgba(250, 250, 248, 0.88);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    backdrop-filter: blur(20px) saturate(1.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s var(--ease), visibility 0s 0.45s;
   }
-  .site-nav.is-open { display: block; }
-  .site-nav__list { flex-direction: column; gap: 0; padding: 8px var(--gutter) 24px; }
-  .site-nav a { padding: 14px 0; }
+  .site-nav.is-open { opacity: 1; visibility: visible; transition: opacity 0.45s var(--ease); }
+  .site-nav__list { flex-direction: column; gap: 0; padding: 24px var(--gutter); }
+  .site-nav li {
+    border-bottom: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s var(--ease);
+  }
+  .site-nav.is-open li { opacity: 1; transform: none; transition: opacity 0.5s, transform 0.6s var(--ease); }
+  .site-nav.is-open li:nth-child(1) { transition-delay: 0.08s; }
+  .site-nav.is-open li:nth-child(2) { transition-delay: 0.13s; }
+  .site-nav.is-open li:nth-child(3) { transition-delay: 0.18s; }
+  .site-nav.is-open li:nth-child(4) { transition-delay: 0.23s; }
+  .site-nav.is-open li:nth-child(5) { transition-delay: 0.28s; }
+  .site-nav a { padding: 20px 0; font-size: 18px; letter-spacing: 0.12em; color: var(--color-ink); }
   .site-nav a::after { display: none; }
+  /* the page underneath stays put while the menu is open */
+  body:has(.site-nav.is-open) { overflow: hidden; }
+  .site-header:has(.site-nav.is-open)::before { opacity: 0; }
 }
 @media (max-width: 720px) {
   :root { --gutter: 20px; --space-section: 96px; --header-h: 64px; }

@@ -114,6 +114,8 @@ if (navToggle && nav) {
     nav.classList.toggle("is-open", open);
   };
   navToggle.addEventListener("click", () => setOpen(navToggle.getAttribute("aria-expanded") !== "true"));
+  // picking a page (or a #section on the same page) closes the menu
+  nav.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && nav.classList.contains("is-open")) {
       setOpen(false);
