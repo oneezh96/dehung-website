@@ -1170,8 +1170,14 @@ body:has(.contact) .site-header::before { -webkit-backdrop-filter: none; backdro
   .field-panel__mark { top: 24px; right: 20px; bottom: auto; height: 24px; }
   .cta-band__inner { padding-top: 80px; padding-bottom: 80px; row-gap: 32px; }
   .cta-band__graphic { display: none; }
-  .site-footer__inner { flex-direction: column; align-items: flex-start; }
-  .site-footer nav ul { flex-wrap: wrap; gap: 16px 24px; }
+  /* footer: links in two even columns first, then the copyright under a thin rule */
+  .site-footer__inner { flex-direction: column; align-items: stretch; gap: 0; padding-top: 48px; }
+  .site-footer nav { order: -1; }
+  .site-footer nav ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .site-footer nav a { display: block; padding: 10px 0; font-size: 13px; color: var(--color-text-soft); }
+  .site-footer__brand { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-border); gap: 12px; }
+  .site-footer__brand img { height: 22px; }
+  .site-footer__brand p { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
